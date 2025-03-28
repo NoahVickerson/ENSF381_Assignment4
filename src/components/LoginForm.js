@@ -4,7 +4,8 @@ import { AuthContext } from './AuthMessage';
 import DisplayStatus from './DisplayStatus';
 import './LoginForm.css';
 import logo from '../images/logo.jpg';
-
+import header from './Header.js'
+import footer from './Footer.js'
 
 function LoginForm() {
     const [username, setUsername] = useState('');
