@@ -1,13 +1,15 @@
-import React, { createContext, useState } from 'react';
+import React, { useContext } from 'react';
+import AuthContext from './AuthContext';
+import DisplayStatus from './DisplayStatus';
 
-export const AuthContext = createContext();
+function AuthMessage() {
+    const { authStatus } = useContext(AuthContext);
 
-export function AuthProvider({ children }) {
-    const [message, setMessage] = useState(null);
+    if (authStatus.isAuthenticated) {
+        return <DisplayStatus type="success" message={`Welcome, ${authStatus.username}!`} />;
+    }
 
-    return (
-        <AuthContext.Provider value={{ message, setMessage }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    return null;
 }
+
+export default AuthMessage;

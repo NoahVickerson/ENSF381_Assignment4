@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
-import Header from './Header.js';
-import Footer from './Footer.js';
+import logo from '../images/logo.jpg';
+import header from './Header.js'
+import footer from './Footer.js'
 
 function Signup() {
     const [username, setUsername] = useState('');
@@ -15,7 +16,6 @@ function Signup() {
     const handleSignup = (e) => {
         e.preventDefault();
         
-        // Clear previous messages
         setMessage('');
 
         // Validation Regex
@@ -57,7 +57,14 @@ function Signup() {
 
     return (
         <div className="login-container">
-            <Header />
+            <header>
+                <img src={logo} alt="LMS Logo" style={{width: '100px', height: '100px'}} />
+                <h1>LMS - Learning Management System</h1>
+            </header>
+            
+            <nav>
+                <a href="/">Homepage</a>
+            </nav>
             
             <main>
                 <h2>Sign Up</h2>
@@ -121,6 +128,7 @@ function Signup() {
                                 background: '#f9f9f9',
                                 color: message.includes('successful') ? 'green' : 'red'
                             }}
+                            dangerouslySetInnerHTML={{ __html: message }}
                         />
                     )}
                     
@@ -129,7 +137,9 @@ function Signup() {
                 </bottomform>
             </main>
             
-            <Footer />
+            <footer>
+                <p>&copy; 2025 LMS. All rights reserved.</p>
+            </footer>
         </div>
     );
 }
