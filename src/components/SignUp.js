@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
-import logo from '../images/logo.jpg';
+import Header from './Header.js';
+import Footer from './Footer.js';
 
 function Signup() {
     const [username, setUsername] = useState('');
@@ -56,14 +57,7 @@ function Signup() {
 
     return (
         <div className="login-container">
-            <header>
-                <img src={logo} alt="LMS Logo" style={{width: '100px', height: '100px'}} />
-                <h1>LMS - Learning Management System</h1>
-            </header>
-            
-            <nav>
-                <a href="/">Homepage</a>
-            </nav>
+            <Header />
             
             <main>
                 <h2>Sign Up</h2>
@@ -136,9 +130,7 @@ function Signup() {
                 </bottomform>
             </main>
             
-            <footer>
-                <p>&copy; 2025 LMS. All rights reserved.</p>
-            </footer>
+            <Footer />
         </div>
     );
 }
