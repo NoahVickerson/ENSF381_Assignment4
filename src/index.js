@@ -1,3 +1,5 @@
+// Gabriel Delisle: 30172306, Noah Vickerson: 30206712
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
