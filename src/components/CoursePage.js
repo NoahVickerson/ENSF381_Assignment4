@@ -3,7 +3,6 @@ import Header from './Header.js';
 import Footer from './Footer.js';
 import CourseCatalog from './CourseCatalog.js';
 import EnrollmentList from './EnrollmentList.js';
-import courses from '../data/courses.js';
 import { useEffect, useState } from 'react';
 
 function Homepage() {
@@ -12,10 +11,12 @@ function Homepage() {
     useEffect(() => {
         let enrolled = localStorage.getItem('courses');
         console.log(enrolled);
-        if (enrolled == '') {
+        if (enrolled == null) {
+            console.log("enrolled is null");
             enrolled = [];
+        }else{
+            setEnrolledCourses(JSON.parse(enrolled));
         }
-        setEnrolledCourses(JSON.parse(enrolled));
     }, []);
 
     const enroll = (course) => {
