@@ -121,7 +121,6 @@ function Signup() {
                                 background: '#f9f9f9',
                                 color: message.includes('successful') ? 'green' : 'red'
                             }}
-                            dangerouslySetInnerHTML={{ __html: message }}
                         />
                     )}
                     
