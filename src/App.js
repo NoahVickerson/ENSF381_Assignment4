@@ -3,9 +3,10 @@ import './App.css';
 import Homepage from './components/Homepage.js';
 import Courses from './components/CoursePage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
 import LoginForm from './components/LoginForm.js';
-import SignUp from './components/SignUp.js'
-import { AuthProvider } from './components/AuthMessage.js';
+import AuthMessage from './components/AuthMessage.js';
+import Signup from './components/SignUp.js';
 
 export const linkTitles = React.createContext(null);
 
