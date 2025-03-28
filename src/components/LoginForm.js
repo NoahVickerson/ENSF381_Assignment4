@@ -1,77 +1,98 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthMessage';
+import DisplayStatus from './DisplayStatus';
 import './LoginForm.css';
-import Header from './Header.js';
-import Footer from './Footer.js';
+import logo from '../images/logo.jpg';
 
-function Login() {
+
+function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const { message, setMessage } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const validateInputs = () => {
+        if (!username || !password) {
+            setMessage({ type: 'error', text: 'Username and password cannot be empty!' });
+            return false;
+        }
+        if (password.length < 8) {
+            setMessage({ type: 'error', text: 'Password must be at least 8 characters!' });
+            return false;
+        }
+        return true;
+    };
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        
+        if (!validateInputs()) return;
+
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const users = await response.json();
-            const validUser = users.find(user => 
-                user.username === username && user.email === password
-            );
+            const validUser = users.find(user => user.username === username && user.email === password);
 
             if (validUser) {
-                setMessage('Login successful! Redirecting...');
-                setTimeout(() => navigate('/course-view'), 2000);
+                setMessage({ type: 'success', text: 'Login successful! Redirecting...' });
+                setTimeout(() => navigate('/courses'), 2000);
             } else {
-                setMessage('Invalid username or password!');
+                setMessage({ type: 'error', text: 'Invalid username or password!' });
             }
         } catch (error) {
-            setMessage('Failed to fetch user data!');
+            setMessage({ type: 'error', text: 'Failed to fetch user data!' });
         }
     };
 
     return (
         <div className="login-container">
-            <Header />
+            <header>
+                <img src={logo} alt="LMS Logo" style={{ width: '100px', height: '100px' }} />
+                <h1>LMS - Learning Management System</h1>
+            </header>
+
+            <nav>
+                <a href="/">Homepage</a>
+            </nav>
+
             <main>
                 <h2>LMS Login</h2>
                 <form onSubmit={handleLogin} className="login-form">
                     <label htmlFor="username">Username:</label>
-                    <input 
-                        type="text" 
-                        id="username" 
+                    <input
+                        type="text"
+                        id="username"
                         className="login-input"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        required 
+                        required
                     />
-                    
+
                     <label htmlFor="password">Password:</label>
-                    <input 
-                        type="password" 
-                        id="password" 
+                    <input
+                        type="password"
+                        id="password"
                         className="login-input"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required 
+                        required
                     />
+
+                    <button type="submit" className="main-button">Login</button>
                 </form>
-                <bottomform padding>
-                <button type="submit" className="main-button">Login</button>
-                <br></br>
-    
-                {message && <div style={{margin: '20px', padding: '10px', border: '2px solid #333', background: '#f9f9f9'}}>{message}</div>}
-                
+
+                {message && <DisplayStatus type={message.type} message={message.text} />}
+
                 <a href="#" className="forgot-password">Forgot Password?</a>
                 <br />
                 <a href="/signup">Don't have an account? Sign Up</a>
-                </bottomform>
             </main>
-            
-            <Footer />
+
+            <footer>
+                <p>&copy; 2025 LMS. All rights reserved.</p>
+            </footer>
         </div>
     );
 }
 
-export default Login;
+export default LoginForm;
