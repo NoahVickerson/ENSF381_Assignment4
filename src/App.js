@@ -4,8 +4,6 @@ import Homepage from './components/Homepage.js';
 import Courses from './components/CoursePage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-export const linkTitles = React.createContext(null);
-
 function App() {
   return (
     <div className="App">

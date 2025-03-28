@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledItem = styled.div`
@@ -22,10 +21,8 @@ const StyledButton = styled.button`
 
 
 function EnrolledCourse(props) {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
-        <StyledItem onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <StyledItem>
             <h3>{props.course.name}</h3>
             <p>Credit Hours: {props.course.creditHours}</p>
             <StyledButton onClick={() => props.unenroll(props.course)}>Drop course</StyledButton>

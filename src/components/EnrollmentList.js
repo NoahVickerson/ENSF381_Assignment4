@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import { styled } from 'styled-components';
 import EnrolledCourse from './EnrolledCourse.js';
 
