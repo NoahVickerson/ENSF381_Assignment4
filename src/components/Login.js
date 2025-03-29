@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
-import logo from '../images/logo.jpg';
 import AuthContext from './AuthContext';
 import DisplayStatus from './DisplayStatus';
 
@@ -11,6 +10,13 @@ function Login() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
     const { setAuthStatus } = useContext(AuthContext);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => setUsers(data));
+    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,8 +32,6 @@ function Login() {
         }
 
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
-            const users = await response.json();
             const validUser = users.find(user => 
                 user.username === username && user.email === password
             );
@@ -76,7 +80,6 @@ function Login() {
                 <DisplayStatus type={message.includes('successful') ? "success" : "error"} message={message} />
                 <a href="#" className="forgot-password">Forgot Password?</a>
                 <br />
-                <a href="/signup">Don't have an account? Sign Up</a>
                 </bottomform>
             </main>
 
