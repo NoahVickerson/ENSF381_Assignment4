@@ -57,10 +57,6 @@ function Signup() {
 
     return (
         <div className="login-container">
-            <header>
-                <img src={logo} alt="LMS Logo" style={{width: '100px', height: '100px'}} />
-                <h1>LMS - Learning Management System</h1>
-            </header>
             
             <nav>
                 <a href="/">Homepage</a>
@@ -137,9 +133,6 @@ function Signup() {
                 </bottomform>
             </main>
             
-            <footer>
-                <p>&copy; 2025 LMS. All rights reserved.</p>
-            </footer>
         </div>
     );
 }
