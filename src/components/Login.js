@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 import AuthContext from './AuthContext';
 import DisplayStatus from './DisplayStatus';
+import Courses from './CoursePage.js';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -25,21 +26,22 @@ function Login() {
             setMessage('Username and password cannot be empty.');
             return;
         }
-
+    
         if (password.length < 8) {
             setMessage('Password must be at least 8 characters.');
             return;
         }
-
+    
         try {
             const validUser = users.find(user => 
                 user.username === username && user.email === password
             );
-
+    
             if (validUser) {
                 setMessage('Login successful! Redirecting...');
                 setAuthStatus({ username, isAuthenticated: true });
-                setTimeout(() => navigate('/course-view'), 2000);
+                setTimeout(() => navigate('/homepage'), 2000);
+
             } else {
                 setMessage('Invalid username or password!');
             }
@@ -47,10 +49,10 @@ function Login() {
             setMessage('Failed to fetch user data!');
         }
     };
+    
 
     return (
         <div className="login-container">
-
             <main>
                 <h2>LMS Login</h2>
                 <form onSubmit={handleLogin} className="login-form">
@@ -74,15 +76,15 @@ function Login() {
                         required 
                     />
                 </form>
-                <bottomform>
-                <button type="submit" className="main-button">Login</button>
 
-                <DisplayStatus type={message.includes('successful') ? "success" : "error"} message={message} />
-                <a href="#" className="forgot-password">Forgot Password?</a>
-                <br />
-                </bottomform>
+                <section>
+                    <button type="button" className="main-button" onClick={handleLogin}>Login</button> {/* Updated to handle login manually */}
+
+                    <DisplayStatus type={message.includes('successful') ? "success" : "error"} message={message} />
+                    <a href="#" className="forgot-password">Forgot Password?</a>
+                    <br />
+                </section>
             </main>
-
         </div>
     );
 }
